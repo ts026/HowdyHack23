@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang=”en” manifest="/cache.appcache">
+<head>
+<title>Jukebox</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="jukebox.css">
+<link rel="stylesheet" rel="noopener" target="_blank" href="bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="background"></div>
+    <div class="animated-title">
+        <h1>Jukebox: Choose Your Song!</h1>
+    </div>
+    <audio id="Track1">
+        <source src="bensound-autoreverse.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="Track3">
+        <source src="bensound-hipnosis.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="Track4">
+        <source src="allthat.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="Track5">
+        <source src="photoalbum.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+        
+         
+        
+    <!-- <p>Click the buttons to play or pause the music.</p> -->
+    
+    <div class="button-container">  
+    <div id="Track1" class="button-group">    
+        <button onclick="play1()" type="button">Play</button> 
+        <button onclick="pause1()" type="button">Pause</button> 
+    </div>
+        <div id="Track2" class="button-group">
+        <button onclick="window.location.href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'">Play</button>
+        <button>Pause</button>
+    </div>
+        <div id="Track3" class="button-group">    
+        <button onclick="play3()" type="button">Play</button> 
+        <button onclick="pause3()" type="button">Pause</button> 
+    </div>
+        <div id="Track4" class="button-group">    
+        <button onclick="play4()" type="button">Play</button> 
+        <button onclick="pause4()" type="button">Pause</button> 
+    </div> 
+        <div id="Track5" class="button-group">   
+        <button onclick="play5()" type="button">Play</button> 
+        <button onclick="pause5()" type="button">Pause</button> 
+    </div> 
+    <script>  
+        var Track1= document.getElementById("Track1");
+        var Track3= document.getElementById("Track3");
+        var Track4= document.getElementById("Track4");
+        var Track5= document.getElementById("Track5");
+        
+        function play1() {
+            Track1.play();
+            Track3.pause()
+            Track4.pause()
+            Track5.pause()
+        }
+        function pause1() {
+            Track1.pause();
+        }
+
+        function play3() {
+            Track3.play();
+            Track1.pause()
+            Track4.pause()
+            Track5.pause()
+        }
+        function pause3() {
+            Track3.pause();
+        }
+
+        function play4() {
+            Track4.play();
+            Track1.pause()
+            Track3.pause()
+            Track5.pause()
+        }
+        function pause4() {
+            Track4.pause();
+        }
+
+        function play5() {
+            Track5.play();
+            Track1.pause()
+            Track3.pause()
+            Track4.pause()
+        }
+        function pause5() {
+            Track5.pause();
+        }
+        
+    </script>
+</body>
+</html>

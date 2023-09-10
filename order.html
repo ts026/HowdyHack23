@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang=”en” manifest="/cache.appcache">
+    <head>
+        
+        <title>Place an Order</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" rel="noopener" target="_blank" href="bootstrap/css/bootstrap.min.css">
+               <!-- Linking stylesheet -->
+               <link rel="stylesheet" href="order.css">
+               <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+               <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap">
+               <link rel="stylesheet" rel="noopener" target="_blank" href="bootstrap/css/bootstrap.min.css"> <!-- This link is only necessary if you’re using an external stylesheet -->
+    </head>
+        <body>
+            <div class="transparent-rectangle">
+                <p class="rectangle-text flavor-text">Choose Your Flavor: </p>
+                <p class="rectangle-text toppings-text">Choose Your Toppings: </p>
+            </div>
+            <div id="flavor">
+                <button id="chocolate" class="chocolate-button">Chocolate</button>
+                <button id="vanilla" class="vanilla-button">Vanilla</button>
+                <button id="strawberry" class="strawberry-button">Strawberry</button>
+            </div>
+            <div id="toppings">
+                <button id="whipped_cream" class="whipped-button">Whipped Cream</button>
+                <button id="cherry" class="cherry-button">Cherry</button>
+                <button id="sprinkles" class ="sprinkles-button">Sprinkles</button>
+            </div>
+            <button id="enter" class="submit-button">Submit Order</button>
+            
+                <script type="module">
+                    function random_number(max){
+                        return Math.floor(Math.random()*max)
+                    }
+                    // Import the functions you need from the SDKs you need
+                    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+                    // TODO: Add SDKs for Firebase products that you want to use
+                    // https://firebase.google.com/docs/web/setup#available-libraries
+                  
+                    // Your web app's Firebase configuration
+                    const firebaseConfig = {
+                      apiKey: "AIzaSyAtGdq37nYQ8_oCBWkOjcLVsZuYZ70WdV0",
+                      authDomain: "aggie-diner.firebaseapp.com",
+                      databaseURL: "https://aggie-diner-default-rtdb.firebaseio.com",
+                      projectId: "aggie-diner",
+                      storageBucket: "aggie-diner.appspot.com",
+                      messagingSenderId: "903339364986",
+                      appId: "1:903339364986:web:a9766e077eec2f56c721c3"
+                    };
+                  
+                    // Initialize Firebase
+                    const app = initializeApp(firebaseConfig);
+                    import {getDatabase, set, get, update, remove, ref, child,push} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"
+                    const db = getDatabase()
+                    function InsertData(){
+                        while(toppings.length<3){
+                            toppings.push('None')
+                        }
+                        set(ref(db),{
+                            Flavor: flavor,
+                            Topping1: toppings[0],
+                            Topping2: toppings[1],
+                            Topping3: toppings[2]
+                        })
+                        .then(()=>{
+                            alert('Order Submitted')
+                        })
+                        .catch(()=>{
+                            alert('error')
+                        })
+                        update(ref(db, 'names/'), )
+                        toppings=[]
+                    }
+            
+                    function select_chocolate(){
+                        flavor='Chocolate'
+                    }
+                    function select_vanilla(){
+                        flavor='Vanilla'
+                    }
+                    function select_strawberry(){
+                        flavor='Strawberry'
+                    }
+            
+                    function select_whipped(){
+                        toppings.push('Whipped Cream')
+                        if (toppings.length>3){
+                        toppings.shift()
+                        }
+                    }
+                    function select_cherry(){
+                        toppings.push('Cherry')
+                        if (toppings.length>3){
+                        toppings.shift()
+                        }
+                    }
+                    function select_sprinkles(){
+                        toppings.push('Sprinkles')
+                        if (toppings.length>3){
+                        toppings.shift()
+                        }
+                    }
+                    
+                    var flavor
+                    var chocolate = document.querySelector('#chocolate')
+                    var vanilla = document.querySelector('#vanilla')
+                    var strawberry = document.querySelector('#strawberry')
+                    
+                    var toppings=[]
+                    var whipped_cream = document.querySelector('#whipped_cream')
+                    var cherry = document.querySelector('#cherry')
+                    var sprinkles = document.querySelector('#sprinkles')
+            
+                    var enter = document.querySelector('#enter')
+                    
+                    chocolate.addEventListener('click', select_chocolate);
+                    vanilla.addEventListener('click', select_vanilla);
+                    strawberry.addEventListener('click', select_strawberry);
+            
+                    whipped_cream.addEventListener('click', select_whipped);
+                    cherry.addEventListener('click', select_cherry);
+                    sprinkles.addEventListener('click', select_sprinkles);
+            
+                    enter.addEventListener('click', InsertData);
+                  </script>
+        
+        </body>
+</html>
