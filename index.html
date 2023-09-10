@@ -1,1 +1,32 @@
-Hello World
+
+<!DOCTYPE html>
+<html lang=”en” manifest="/cache.appcache">
+    <head>
+        <meta charset="utf-8">
+        <!-- Game Title: -->
+        <title> Aggie Diner! </title>
+        <!-- Linking stylesheet -->
+        <link rel="stylesheet" href="styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap">
+        <link rel="stylesheet" rel="noopener" target="_blank" href="bootstrap/css/bootstrap.min.css"> <!-- This link is only necessary if you’re using an external stylesheet -->
+    </head>
+    <body>
+        <!-- Animating game title in css -->
+        <div class="background"></div>
+    <h1 class="animated-title">Aggie Diner!</h1>
+        <div class = "start-buttons">
+            <button id = "make-button" onclick="window.location.href='make.html';">Make</button>
+            <button id = "order-button" onclick="window.location.href='order.html'">Order</button>  
+            <button id = "music-button" onclick="window.location.href='Jukebox.html'">Music</button>        
+        </div>
+
+        <div class="gif-container">
+            <img class="my-gif" src="rev.gif" alt="Your GIF">
+          </div>
+    </body>
+
+    <script>
+        
+    </script>
+</html>

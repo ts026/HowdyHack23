@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang=”en” manifest="/cache.appcache">
+    <head>
+        <title>Let's make a milkshake!</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" rel="noopener" target="_blank" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="make.css">
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap">
+        <link rel="stylesheet" rel="noopener" target="_blank" href="bootstrap/css/bootstrap.min.css"> <!-- This link is only necessary if you’re using an external stylesheet -->
+        <script src="make.js"></script>
+    </head>
+    <script src="orders.java"></script>
+    <body>
+        <div class="animated-title">
+            <h1>Let's make a milkshake!</h1>
+        </div>
+        <div class="transparent-rectangle"></div>
+        <div id="flavor">
+            <button id="chocolate" class="show-chocolate" onclick="showFlavor('chocolate')">Chocolate</button>
+            <button id="vanilla" class="show-vanilla" onclick="showFlavor('vanilla')">Vanilla</button>
+            <button id="strawberry" class="show-strawberry" onclick="showFlavor('strawberry')">Strawberry</button>
+        </div>
+        
+        <div id="imageContainer">
+            <div id="chocolateImage" class="flavor-image">
+                <img src="chocolate.png" alt="Chocolate Image">
+            </div>
+            <div id="vanillaImage" class="flavor-image">
+                <img src="vanilla.png" alt="Vanilla Image">
+            </div>
+            <div id="strawberryImage" class="flavor-image">
+                <img src="strawberry.png" alt="Strawberry Image">
+            </div>
+        </div>
+        
+        <div id="toppings">
+            <button id="whipped_cream" class="show-whipped" onclick="showTopping('whip')">Whipped Cream</button>
+            <button id="cherry" class="show-cherry" onclick="showTopping('cherry')">Cherry</button>
+            <button id="sprinkles" class="show-sprinkles" onclick="showTopping('sprinkles')">Sprinkles</button>
+        </div>
+        
+        <div id="imageContainer">
+            <div id="whipImage" class="topping-image">
+                <img src="whip.png" alt="Whipped Cream Image">
+            </div>
+            <div id="cherryImage" class="topping-image">
+                <img src="cherry.png" alt="Cherry Image">
+            </div>
+            <div id="sprinklesImage" class="topping-image">
+                <img src="sprinkles.png" alt="Sprinkles Image">
+            </div>
+        </div>
+    
+        <button id="enter" class = "serve-button" onclick="compare()">Serve!</button>
+        <!-- getting image to show (?):-->
+        <!-- <button onclick="showImage()">Show Image</button> -->
+    
+        <div id="imageContainer" style="display:none;">
+            <img id="myImage" src="chocolate.png">
+        </div>p></p>
+    
+        <script>
+            function showImage() {
+                document.getElementById('imageContainer').style.display = 'block';
+            }
+        </script>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAtGdq37nYQ8_oCBWkOjcLVsZuYZ70WdV0",
+      authDomain: "aggie-diner.firebaseapp.com",
+      databaseURL: "https://aggie-diner-default-rtdb.firebaseio.com",
+      projectId: "aggie-diner",
+      storageBucket: "aggie-diner.appspot.com",
+      messagingSenderId: "903339364986",
+      appId: "1:903339364986:web:a9766e077eec2f56c721c3"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    import {getDatabase, set, get, update, remove, ref, child} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"
+    const db = getDatabase()
+    get(ref(db)).then((snapshot) => {
+        const data = snapshot.val();
+        desired_flavor=data['Flavor']
+        desired_toppings=[data['Topping1'],data['Topping2'],data['Topping3']]
+        alert(desired_flavor)
+        alert(desired_toppings)
+    })
+
+    function check(){
+        while(toppings.length<3){
+            toppings.push('None')
+        }
+        if (flavor==desired_flavor&&toppings.toString()==desired_toppings.toString()){
+            alert('Good Job')
+            remove(ref(db))
+        }
+        else{
+            alert('try again')
+            toppings=[]
+        }
+    }
+
+    function select_chocolate(){
+        flavor='Chocolate'
+    }
+    function select_vanilla(){
+        flavor='Vanilla'
+    }
+    function select_strawberry(){
+        flavor='Strawberry'
+    }
+
+    function select_whipped(){
+        toppings.push('Whipped Cream')
+        if (toppings.length>3){
+        toppings.shift()
+        }
+    }
+    function select_cherry(){
+        toppings.push('Cherry')
+        if (toppings.length>3){
+        toppings.shift()
+        }
+    }
+    function select_sprinkles(){
+        toppings.push('Sprinkles')
+        if (toppings.length>3){
+        toppings.shift()
+        }
+    }
+    var desired_flavor
+    var desired_toppings
+    var flavor
+    var chocolate = document.querySelector('#chocolate')
+    var vanilla = document.querySelector('#vanilla')
+    var strawberry = document.querySelector('#strawberry')
+    
+    var toppings=[]
+    var whipped_cream = document.querySelector('#whipped_cream')
+    var cherry = document.querySelector('#cherry')
+    var sprinkles = document.querySelector('#sprinkles')
+
+    var enter = document.querySelector('#enter')
+    
+
+    chocolate.addEventListener('click', select_chocolate);
+    vanilla.addEventListener('click', select_vanilla);
+    strawberry.addEventListener('click', select_strawberry);
+
+    whipped_cream.addEventListener('click', select_whipped);
+    cherry.addEventListener('click', select_cherry);
+    sprinkles.addEventListener('click', select_sprinkles);
+
+    enter.addEventListener('click', check);
+  </script>
+    </body>
+</html>
